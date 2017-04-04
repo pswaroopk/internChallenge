@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>AUCTION VEHICLES</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+    <div class="vehicle">
+        <button id="button">List</button>
+
+    </div>
+
+    <script>
+        loadJSON('input/sale-data.json',
+            function(data) {
+                console.log(data);
+            },
+            function(xhr) {
+                console.error(xhr);
+            }
+        );
+
+        function loadJSON(path, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (error)
+                            error(xhr);
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        }
+    </script>
+
+</body>
+
+</html>
